@@ -1,0 +1,54 @@
+<p-table [value]="reviews" styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="pageSize" [totalRecords]="reviewCount"
+(onPage)="changePage($event)" [loading]="loading">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Id</th>
+            <th>Author</th>
+            <th>Ad</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>Actions</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th>
+                <p-columnFilter type="text" field="author"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="ad"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="rating"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="content"></p-columnFilter>
+            </th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-review>
+        <tr>
+            <td>{{ review.id }}</td>
+            <td><a [routerLink]="'/profile/' + review.authorId" target="_blank">{{ review.authorName }}<br/>({{ review.authorId }})</a></td>
+            <td><a [routerLink]="'/housing/' + review.housingId" target="_blank">{{ review.housingId }}</a></td>
+            <td>{{ review.rating }}</td>
+            <td>{{ review.content }}</td>
+            <td>
+                <p-button icon="pi pi-cog" styleClass="p-button-rounded p-button-info p-button-outlined" (click)="menu.toggle($event)"></p-button>
+                <p-tieredMenu #menu [model]="reviewMenu[review.id]" [popup]="true" appendTo="body"></p-tieredMenu>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<p-dialog *ngIf="modalReview" header="Edition d'avis" [(visible)]="modalVisible" [modal]="true" [draggable]="false" [resizable]="false">
+    <div class="review-modal">
+        <label htmlFor="rating">Rating</label>
+        <p-rating id="rating" [cancel]="false" [(ngModel)]="modalReview.rating" />
+        <label htmlFor="text">Comment</label>
+        <textarea type="text" id="lastname" pInputTextarea [(ngModel)]="modalReview.content"></textarea>
+    </div>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-times" (click)="modalVisible = false" label="Cancel" styleClass="p-button p-button-danger"></p-button>
+        <p-button icon="pi pi-save" (click)="updateReview(modalReview); modalVisible = false;" label="Save" styleClass="p-button p-button-success"></p-button>
+    </ng-template>
+</p-dialog>

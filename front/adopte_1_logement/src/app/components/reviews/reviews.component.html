@@ -1,0 +1,16 @@
+<div class="container">
+    <!-- Write reviews -->
+    <div class="newReview">
+        <textarea id="newReviewTextarea" [ngClass]="{'clicked': isClicked}" pInputTextarea placeholder="Add a comment" [(ngModel)]="newReviewContent" (click)="onLoginVerification()"></textarea>
+        
+        <div class="display-in-row" *ngIf="isAbleToComment" [ngClass]="{'appear': isAbleToComment}">
+            <p>Rating : </p>
+            <p-rating class="ratingInput" [(ngModel)]="newReviewRating" [cancel]="false"></p-rating>
+            <p-button id="sendingButton" label="Send" [disabled]="!newReviewContent" (click)="onPostReview()"></p-button>
+        </div>
+    </div>
+    <!-- Display reviews -->
+    <div class="reviews" *ngFor="let item of reviews">
+        <app-review [review]="item"></app-review>
+    </div>
+</div>

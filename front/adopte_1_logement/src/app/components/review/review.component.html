@@ -1,0 +1,15 @@
+<div class="box" [ngClass]="minimal ? 'min-box' : ''">
+    <div class="header">
+        <p-avatar icon="pi pi-user" styleClass="mr-2" size="large" shape="circle"></p-avatar>
+        <div class="author-date">
+            <strong>{{review.authorName}}</strong>
+            <p class="grey-font">On {{dateString | date: 'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="rating">
+            <p-rating [(ngModel)]="review.rating" [readonly]="true" [cancel]="false"></p-rating>
+        </div>
+    </div>
+    <div class="content">
+        <p>{{review.content}}</p>
+    </div>
+</div>

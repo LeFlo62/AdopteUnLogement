@@ -1,0 +1,84 @@
+.my-rent {
+  width: 100%;
+}
+
+.titre {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+}
+
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+
+  .header {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--boxBgColor);
+    border-radius: 10px;
+
+    .user-info {
+      width: 100%;
+    }
+
+    .profile-picture-container {
+      display: flex;
+      margin-left: 50px;
+      margin-right: 50px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+
+      .profile-picture-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+
+  .body {
+    display: flex;
+
+    flex-direction: row;
+    height: 100%;
+    align-items: stretch;
+    align-items: stretch;
+    justify-content: space-between;
+    margin-top: 15px;
+    padding-bottom: 15px;
+    overflow: hidden;
+
+    .my-location {
+      display: flex;
+      align-items: stretch;
+      flex-direction: column;
+      width: 45%;
+      background-color: var(--boxBgColor);
+    }
+
+    .my-reviews {
+      display: flex;
+      flex-direction: column;
+      width: 45%;
+      background-color: var(--boxBgColor);
+    }
+  }
+}

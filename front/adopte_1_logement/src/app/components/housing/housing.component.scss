@@ -1,0 +1,154 @@
+.container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 0.5rem 2rem 1rem 2rem;
+
+    .header {
+        display: flex;
+        margin: 1rem 0;
+
+        .back-to-results {
+            display: flex;
+            align-items: center;
+            
+            &:hover {
+                cursor: pointer;
+            }
+            p {
+                margin-left: 0.5rem;
+            }
+        }
+        .research {
+            margin-left: auto;
+        }
+
+    }
+
+    h2 {
+        margin: 0.5rem 0;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        padding: 0.5rem 0;
+        
+        .left-side {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+
+            .images{
+                margin-bottom: 1rem;
+            }
+                
+            img {
+                height: 20rem;
+                border-radius: 10px;
+            }
+            .tenants-review {
+                display: flex;
+                align-items: center;
+                margin: 0 0 1rem 0;
+                
+                h3{
+                    margin: 0;
+                }
+                p-rating {
+                    margin: 0 0.7rem;
+                }
+                button {
+                    margin-left: auto;
+                }
+            }
+            .landlord-requests {
+                display: flex;
+                flex: 1;
+
+                .services {
+                    width: calc(50% - 0.5rem);
+                }
+                .constraints {
+                    margin-left: auto;
+                    width: calc(50% - 0.5rem);
+                }
+            }
+        }
+        .right-side {
+            flex: 1;
+            padding-left: 1rem;
+            display: flex;
+            flex-direction: column;
+
+            .landlord-info {
+                display: flex;
+                
+                .landlord-description {
+                    height: 4rem;
+                    flex: 1;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+
+                    h3 {
+                        margin: 0 0.5rem 0 0;
+                    }
+                }
+                p-avatar {
+                    margin-left: 1rem;
+                }
+            }
+            .buttons {
+                display: flex;
+                margin: 1rem 0;
+
+                .favorites {
+                    margin-left: auto;
+                }
+            }
+
+            .housing-description {
+                flex: 1;
+            }
+        }
+    }
+
+    h3 {
+        margin: 0 0 1rem 0;
+    }
+    p {
+        margin: 0;
+    }
+    ul, li {
+        margin: 0;
+    }
+    .skeleton-padding {
+        padding: 1px;
+    }
+    .carousel-skeleton {
+        height: 20rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 0.5rem 1rem;
+
+        .content {
+            flex-direction: column;
+
+            .left-side {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            .right-side {
+                padding-left: 0;
+            }
+        }
+    }
+    
+}

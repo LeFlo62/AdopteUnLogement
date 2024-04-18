@@ -1,0 +1,36 @@
+<div *ngIf="housing; else housing_skeleton">
+    <div class="housing-card" [ngClass]="minimal ? 'minimal-housing-card' : ''">
+        <ng-container>
+            <img [src]="housing.image" (load)="housing.imageLoaded = true" [hidden]="!housing.imageLoaded" alt="housing image">
+            <p-skeleton *ngIf="!minimal && !housing.imageLoaded" width="100%" height="300px"></p-skeleton>
+        </ng-container>
+        <div class="housing-card-content">
+            <div class="housing-card-description">
+                <div class="housing-card-content-title">
+                    {{ housing.title }}
+                </div>
+                <div class="housing-card-content-ranking">
+                    <p-rating [(ngModel)]="housing.rating" [readonly]="true" [cancel]="false"></p-rating>
+                    <p>{{ housing.rating | number:'1.0-1' }}</p>
+                </div>
+                <div *ngIf="!minimal" class="housing-card-content-author">
+                    {{ housing.authorName }}
+                </div>
+            </div>
+            <p-avatar *ngIf="!minimal" icon="pi pi-user" styleClass="mr-2" size="large" shape="circle"></p-avatar>
+        </div>
+    </div>
+</div>
+<ng-template #housing_skeleton>
+    <div class="housing-card" [ngClass]="minimal ? 'minimal-housing-card' : ''">
+        <p-skeleton [size]="!minimal ? '300px' : '64px'"></p-skeleton>
+        <div class="housing-card-content">
+            <div class="housing-card-description">
+                <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton *ngIf="!minimal" width="5rem" styleClass="mb-2"></p-skeleton>
+            </div>
+            <p-skeleton *ngIf="!minimal" shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+        </div>
+    </div>
+</ng-template>

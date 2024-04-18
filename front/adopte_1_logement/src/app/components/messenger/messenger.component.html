@@ -1,0 +1,37 @@
+<div class="content">
+    <div class="contacts">
+        <div class="contact" *ngFor="let user of lastUsers" [routerLink]="'/message/' + user.id" [attr.selected]="userId == user.id ? '' : null">
+            <p-avatar icon="pi pi-user" styleClass="mr-2" size="large" shape="circle"></p-avatar>
+            <p class="username">{{user.lastName + ' ' + user.firstName}}</p>
+        </div>
+    </div>
+    <div class="chat">
+        <div #messagesBox class="messages" (scroll)="onScroll($event)">
+            <div class="empty-space" *ngIf="!hasElementsLeft || this.messages.length == 0">
+                <p class="text-center">Start of the chat</p>
+            </div>
+            <div *ngFor="let message of messages; index as i">
+                <div *ngIf="message else message_skeleton" class="message" [ngClass]="{'message-received': message.senderId == userId, 'message-sent': message.senderId != userId}">
+                    <div class="message-content">
+                        {{message.content}}
+                    </div>
+                    <div class="message-date">
+                        {{message.sendTime | date: 'dd/MM/yyyy HH:mm'}}
+                    </div>
+                </div>
+                <ng-template #message_skeleton>
+                    <div class="message" [ngClass]="{'message-received': i % 2 == 0, 'message-sent': i % 2 == 1}">
+                        <div class="message-content">
+                            <p-skeleton width="10rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+                            <p-skeleton width="5rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <div class="send-message" [formGroup]="form">
+            <input pInputText type="text" formControlName="message" (keyup.enter)="sendMessage()" placeholder="Write your text here...">
+            <button pButton type="button" (click)="sendMessage()"><i class="pi pi-send"></i></button>
+        </div>
+    </div>
+</div>

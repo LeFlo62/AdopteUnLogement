@@ -1,0 +1,18 @@
+<p-menubar [model]="menuBar" styleClass="app-menubar">
+  <ng-template pTemplate="start">
+      <img src="favicon.ico" height="40" class="mr-2" />
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div class="endbar" *ngIf="user else connectButton">
+      <p>{{ user.firstName }} {{ user.lastName }}</p>
+      <p-avatar class="user-avatar" icon="pi pi-user" styleClass="mr-2" size="large" shape="circle" (click)="menu.toggle($event)"></p-avatar>
+      <p-tieredMenu #menu [model]="userMenu" [popup]="true"></p-tieredMenu>
+    </div>
+    <ng-template #connectButton>
+      <button pButton pRipple label="Log in" class="w-full" [routerLink]="'/login'"></button>
+    </ng-template>
+  </ng-template>
+</p-menubar>
+<div id="content-pane" style="flex-grow: 1; position: relative;">
+  <router-outlet></router-outlet>
+</div>

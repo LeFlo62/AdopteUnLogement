@@ -1,0 +1,49 @@
+<div class="container">
+    <form [formGroup]="createHousingForm" class="box">
+        <div class="additional-padding">
+            <h2>New ad :</h2>
+            <!-- Title input -->
+            <span class="p-float-label">
+                <input id="title" pInputText class="p-inputtext-sm" formControlName="title"/>
+                <label htmlFor="title">Title <i>(mandatory)</i></label>
+            </span>
+            <!-- Housing description input -->
+            <span class="p-float-label">
+                <textarea id="float-input" rows="5" cols="30" pInputTextarea formControlName="housingDescription"></textarea>
+                <label for="float-input">Description</label>
+            </span>
+            <div class="flexbox">
+                <!-- Services input -->
+                <div class="services">
+                    <p>Services :</p>
+                    <div formArrayName="services">
+                        <div *ngFor="let service of servicesArray.controls; let i = index">
+                        <input [formControlName]="i" pInputText class="p-inputtext-sm service-inputs">
+                        <button type="button" pButton class="p-button-text p-button-secondary delete-button" icon="pi pi-times" (click)="removeService(i)"></button>
+                        </div>
+                    </div>
+                    <button type="button" pButton class="p-button-outlined add-button" (click)="addService()">Add a service</button>
+                </div>
+                <!-- Constraints input -->
+                <div class="constraints">
+                    <p>Constraints :</p>
+                    <div formArrayName="constraints" class="constraints">
+                        <div *ngFor="let constraint of constraintsArray.controls; let i = index">
+                        <input [formControlName]="i" pInputText class="p-inputtext-sm constraint-inputs">
+                        <button type="button" pButton class="p-button-text p-button-secondary delete-button" icon="pi pi-times" (click)="removeConstraint(i)"></button>
+                        </div>
+                    </div>
+                    <button type="button" pButton class="p-button-outlined add-button" (click)="addConstraint()">Add a contraint</button>
+                </div>
+            </div>
+            <!-- Images input -->
+            <p-fileUpload #fileUpload name="files[]" [showUploadButton]="false" [multiple]="true" accept="image/*"></p-fileUpload>
+            <!-- Info message -->
+            <p class="info">
+                <i>Make sure to upload photos before publishing ad.</i>
+            </p>
+            <!-- Submit button -->
+            <button id="submitButton" pButton class="p-button-success" [disabled]="!createHousingForm.valid" (click)="onSubmit(fileUpload)">Publish ad</button>
+        </div>
+    </form>
+</div>

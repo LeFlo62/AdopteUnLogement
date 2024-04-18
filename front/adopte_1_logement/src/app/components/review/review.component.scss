@@ -1,0 +1,42 @@
+.box {
+    width: 50rem;
+
+    .header {
+        display: flex;
+        align-items: center;
+
+        .author-date {
+            display: flex;
+            flex-direction: column;
+            margin-left: 1rem;
+        }
+
+        .rating {
+            display: flex;
+            margin-left: auto;
+        }
+    }
+    .content {
+        margin-top: 1rem;
+    }
+    p {
+        margin: 5px 0 0 0 ;
+    }
+    .grey-font {
+        color: var(--greyFont);
+    }
+}
+
+.min-box {
+  width: auto;
+}
+
+.disabled{
+  display: none;
+}
+
+.min-rating {
+  .p {
+    margin-left: 5px;
+  }
+}

@@ -1,0 +1,46 @@
+<form [formGroup]="form" class="user-form">
+    <div class="user-section" *ngIf="!editing else edit">
+      <div class="user-details">
+        <p *ngIf="profile else firstNameSkeleton">First Name : {{profile.firstName}}</p>
+        <ng-template #firstNameSkeleton><p class="skeleton">First Name : <p-skeleton width="10rem" styleClass="mb-2 inline"></p-skeleton></p></ng-template>
+        <p *ngIf="profile else lastNameSkeleton">Last Name : {{profile.lastName}}</p>
+        <ng-template #lastNameSkeleton><p class="skeleton">Last Name : <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton></p></ng-template>
+        <p *ngIf="profile else emailSkeleton">Email : {{profile.email}}</p>
+        <ng-template #emailSkeleton><p class="skeleton">Email : <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton></p></ng-template>
+        <p *ngIf="isSelf()">Mot de passe : ●●●●●●●●</p>
+      </div>
+      <div class="buttons" *ngIf="isSelf()">
+        <button pButton (click)="editForm()">Edit</button>
+      </div>
+    </div>
+    <ng-template #edit>
+      <div class="user-section">
+        <div class="user-details" editing>
+          <div class="field">
+            <label for="firstName">First Name</label>
+            <input pInputText type="text" id="firstName" formControlName="firstName">
+          </div>
+          <div class="field">
+            <label for="lastName">Last Name</label>
+            <input pInputText type="text" id="lastName" formControlName="lastName">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input pInputText type="email" id="email" formControlName="email">
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <div>
+              <input pInputText type="password" id="password" formControlName="password" placeholder="Mot de passe">
+            <input pInputText type="password" id="passwordConfirm" formControlName="passwordConfirm" placeholder="Confirm password">
+            <small *ngIf="form.value.passwordConfirm && form.value.passwordConfirm != form.value.password">Passwords should be the same</small>
+            </div>
+          </div>
+        </div>
+        <div class="buttons" *ngIf="isSelf()">
+          <button pButton class="p-button-raised p-button-success" (click)="submit()">Save</button>
+          <button (click)="editing = false" pButton class="p-button-outlined p-button-danger">Cancel</button>
+        </div>
+      </div>
+    </ng-template>
+</form>

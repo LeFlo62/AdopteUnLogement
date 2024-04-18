@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="filters">
+        <form [formGroup]="sorting">
+            <p-dropdown [options]="sortRating" formControlName="rating" optionLabel="label" placeholder="Rating sort" [showClear]="true"></p-dropdown>
+        </form>
+    </div>
+    <div class="housing-list">
+        <div class="housing-card" *ngFor="let housing of housingList" [routerLink]="'/housing/' + housing?.id">
+            <housing-list-item [housing]="housing"></housing-list-item>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<p-table [value]="users" styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="pageSize" [totalRecords]="userCount"
+(onPage)="changePage($event)" [loading]="loading">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Id</th>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th>
+                <p-columnFilter type="text" field="lastName"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="firstName"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="email"></p-columnFilter>
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+        <tr>
+            <td><a [routerLink]="'/profile/' + user.id" target="_blank">{{ user.id }}</a></td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.email }}</td>
+            <td><p-multiSelect [options]="roles" [(ngModel)]="user.roles" optionLabel="label" optionValue="value" [showHeader]="false" (onChange)="updateUser(user)" appendTo="body"></p-multiSelect></td>
+            <td>
+                <p-button icon="pi pi-cog" styleClass="p-button-rounded p-button-info p-button-outlined" (click)="menu.toggle($event)"></p-button>
+                <p-tieredMenu #menu [model]="userMenu[user.id]" [popup]="true" appendTo="body"></p-tieredMenu>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<p-dialog *ngIf="modalUser" [header]="modalUser!.lastName + ' ' + modalUser!.firstName" [(visible)]="modalVisible" [modal]="true" [draggable]="false" [resizable]="false">
+    <div class="user-modal">
+        <label htmlFor="firstname">First Name</label>
+        <input type="text" id="firstname" pInputText [(ngModel)]="modalUser.firstName" />
+        <label htmlFor="lastname">Last Name</label>
+        <input type="text" id="lastname" pInputText [(ngModel)]="modalUser.lastName" />
+        <label htmlFor="email">Email</label>
+        <input type="email" id="email" pInputText [(ngModel)]="modalUser.email" />
+        <label htmlFor="email">Password</label>
+        <p-password [(ngModel)]="modalPassword" [feedback]="false"></p-password>
+    </div>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-times" (click)="modalVisible = false" label="Cancel" styleClass="p-button p-button-danger"></p-button>
+        <p-button icon="pi pi-save" (click)="updateUser(modalUser); modalVisible = false;" label="Save" styleClass="p-button p-button-success"></p-button>
+    </ng-template>
+</p-dialog>

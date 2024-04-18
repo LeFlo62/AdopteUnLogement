@@ -1,0 +1,6 @@
+<p-tabMenu [model]="items" [activeItem]="activeItem" (activeItemChange)="activeItem = $event"></p-tabMenu>
+<div class="content">
+    <app-admin-users *ngIf="activeItem.label == 'Users'"></app-admin-users>
+    <app-admin-ads *ngIf="activeItem.label == 'Ads'"></app-admin-ads>
+    <app-admin-reviews *ngIf="activeItem.label == 'Ratings'"></app-admin-reviews>
+</div>

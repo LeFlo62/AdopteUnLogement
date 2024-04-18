@@ -1,0 +1,6 @@
+api:
+  url: 'https://api.adopteunlogement.com/'
+
+spring:
+  jpa:
+    show-sql: false
